@@ -111,13 +111,14 @@
             });
             $('#result').val(html);
         });
+
         $('#submit-spec').click(function(){
             let html = '';
             
             $('#form-input > div').each(function(index, el){
                 const url = $(this).find('#url').val();
                 const label = $(this).find('#label').val();
-                html += '\n['+ label +']("'+ url +'") \n';
+                html += '- ' + '['+ label +']('+ url +') \n';
             });
             $('#result').val(html);
         });
