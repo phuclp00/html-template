@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">  </head>
   <body>
-    <div class="container">
+    <div class="container-fluid" style="max-width: 80%;">
         <h1 class="text-center">Auto Generate Hyperlink Tag</h1>
         <a href="./" class="btn btn-danger position-absolute" style="top: 10px;">
             Move to Watch Video
@@ -34,6 +34,7 @@
                     <button type="button" class="btn btn-primary" id="add">+</button>
                     <button type="button" class="btn btn-outline-danger" id="submit">To hyperlink</button>
                     <button type="button" class="btn btn-outline-success" id="submit-spec">To special</button>
+                    <button type="button" class="btn btn-outline-primary" id="submit-gg">GG sheet</button>
                 </div>
             </div>
         </div>
@@ -123,7 +124,16 @@
             $('#result').val(html);
         });
 
-
+        $('#submit-gg').click(function(){
+            let html = '';
+            
+            $('#form-input > div').each(function(index, el){
+                const url = $(this).find('#url').val();
+                const label = $(this).find('#title').val();
+                html += `=HYPERLINK("${ url }";"- ${ label }")` + '\n';
+            });
+            $('#result').val(html);
+        });
         
     </script>
 </body>
