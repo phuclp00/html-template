@@ -130,7 +130,7 @@
             $('#form-input > div').each(function(index, el){
                 const url = $(this).find('#url').val();
                 const label = $(this).find('#title').val();
-                html += `=HYPERLINK("${ url }";"- ${ label }")` + '\n';
+                html += `=HYPERLINK("${ url }";"${ label }")` + '\n';
             });
             $('#result').val(html);
         });
