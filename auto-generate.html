@@ -53,13 +53,13 @@
                     <!-- Radio-button group with 3 options -->
                     <div id="radio-group">
                         <label class="btn btn-outline-primary">
-                            <input type="radio" name="options" id="option1" autocomplete="off" checked> List
+                            <input type="radio" name="options" id="option1" value="ul" autocomplete="off" > List
                         </label>
                         <label class="btn btn-outline-success">
-                            <input type="radio" name="options" id="option2" autocomplete="off"> Number
+                            <input type="radio" name="options" id="option2" value="ol" autocomplete="off"> Number
                         </label>
                         <label class="btn btn-outline-danger">
-                            <input type="radio" name="options" id="option3" autocomplete="off"> Non-List
+                            <input type="radio" name="options" id="option3" autocomplete="off" checked> Non-List
                         </label>
                     </div>  
                 </div> 
@@ -82,6 +82,9 @@
                     <textarea name="result" id="result" rows="20" class="form-control"></textarea>
                 </div>
             </div>
+            
+
+
         </div>
     </div>
     <!-- Optional JavaScript -->
@@ -89,6 +92,19 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    <!-- CKEditor 5  -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/20.0.0/classic/ckeditor.js"></script>
+    <script>
+        let editor;
+        ClassicEditor
+            .create( document.querySelector( '#result' ) )
+            .then( res => {
+                editor = res;
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
     <script type="text/javascript">
         // declare an array to store all number
         let arrNumber = []; 
@@ -153,12 +169,21 @@
         // get all input value and generate html tag with
         $('#submit').click(function(){
             let html = '';
+
             $('#form-input > div').each(function(index, el){
                 const url = $(this).find('#url').val();
                 const label = $(this).find('#title').val();
-                html += '<a href="'+ url +'">'+ label +'</a> \n';
+                const desc = $(this).find('#description').val();
+                const radio = $('input[name="options"]:checked').val();
+                if (desc != '') {
+                    html += '<'+ radio +'><li><a href="'+ url +'">'+ label +'</a>: '+ desc + '</li></'+ radio +'>\n';
+                }
+                else {
+                    html += '<'+ radio +'><li><a href="'+ url +'">'+ label +'</a></li></'+ radio +'>\n';
+                }
+
+                editor.setData(html);           
             });
-            $('#result').val(html);
         });
 
         $('#submit-spec').click(function(){
@@ -168,9 +193,16 @@
                 const url = $(this).find('#url').val();
                 const label = $(this).find('#title').val();
                 const desc = $(this).find('#description').val();
-                html += '- ' + '['+ label +']('+ url +'): ' + desc + '\n';
+                // get length of div id
+                if (desc != '') {
+                    html += '<li> - ' + '['+ label +']('+ url +'): ' + desc + '</li>\n';
+                }
+                else {
+                    html += '<li> - ' + '['+ label +']('+ url +')</li>\n';
+                }
             });
             $('#result').val(html);
+            editor.setData(html);           
         });
 
         $('#submit-gg').click(function(){
@@ -181,6 +213,8 @@
                 html += `=HYPERLINK("${ url }";"${ label }")` + '\n';
             });
             $('#result').val(html);
+            editor.setData(html);           
+
         });
 
     </script>
