@@ -16,26 +16,63 @@
         </a>
         <div id="form-input" class="form-input">
             <div id="form-1" class="row">
-                <div class="col-5 mt-2 pt-1">
+                <div class="col-12 row">
+                    <div class="col-5 mt-2 pt-1">
+                        <div class="form-group">
+                            <label for="url">Link</label>
+                            <input type="text" name="url" id="url" class="form-control" placeholder="Enter URL" aria-describedby="helpURL">
+                            <small id="helpURL" class="text-muted">Enter URL</small>
+                        </div>
+                    </div>
+                    <div class="col-4 mt-2 pt-1">
+                         <div class="form-group">
+                            <label for="label">Title</label>
+                            <input type="text" name="title" id="title" class="form-control" placeholder="Enter Title" aria-describedby="helpTitle">
+                            <small id="helpTitle" class="text-muted">Enter Title</small>
+                        </div>
+                    </div>
+                    <div class="col-3 align-self-center">
+                        <button type="button" class="btn btn-primary" id="add">+</button>
+                    </div>
+                </div>
+                
+                <div class="col-6">
                     <div class="form-group">
-                        <label for="url">Link</label>
-                        <input type="text" name="url" id="url" class="form-control" placeholder="Enter URL" aria-describedby="helpId">
-                        <small id="helpId" class="text-muted">Enter URL</small>
+                        <label for="label">Description</label>
+                        <input type="text" name="description" id="description" class="form-control" placeholder="Enter Description" aria-describedby="HelpDesc">
+                        <small id="HelpDesc" class="text-muted">Enter Title</small>
                     </div>
                 </div>
-                <div class="col-4 mt-2 pt-1">
-                     <div class="form-group">
-                        <label for="label">Title</label>
-                        <input type="text" name="title" id="title" class="form-control" placeholder="Enter Title" aria-describedby="helpId">
-                        <small id="helpId" class="text-muted">Enter Title</small>
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="radio-group">Select Type List</label>
+                    <!-- Radio-button group with 3 options -->
+                    <div id="radio-group">
+                        <label class="btn btn-outline-primary">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked> List
+                        </label>
+                        <label class="btn btn-outline-success">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> Number
+                        </label>
+                        <label class="btn btn-outline-danger">
+                            <input type="radio" name="options" id="option3" autocomplete="off"> Non-List
+                        </label>
+                    </div>  
+                </div> 
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="button-group">Select Type Format</label>
+                    <div id="button-group" class="button">
+                        <button type="button" class="btn btn-outline-danger" id="submit">To hyperlink</button>
+                        <button type="button" class="btn btn-outline-success" id="submit-spec">To special</button>
+                        <button type="button" class="btn btn-outline-primary" id="submit-gg">GG sheet</button>
                     </div>
-                </div>
-                <div class="col-3 align-self-center">
-                    <button type="button" class="btn btn-primary" id="add">+</button>
-                    <button type="button" class="btn btn-outline-danger" id="submit">To hyperlink</button>
-                    <button type="button" class="btn btn-outline-success" id="submit-spec">To special</button>
-                    <button type="button" class="btn btn-outline-primary" id="submit-gg">GG sheet</button>
-                </div>
+                </div> 
             </div>
         </div>
         <div class="row">
@@ -65,40 +102,51 @@
                     lengthDiv += 1;
                 }
             }
-
-            const html = '<div id="form-'+ lengthDiv +'" class="row">'+
-                            '<div class="col-5 mt-2 pt-1">'+
-                                '<div class="form-group">'+
-                                    '<label for="url">Link '+ lengthDiv +'</label>'+
-                                    '<input type="text" name="url" id="url" class="form-control" placeholder="Enter URL" aria-describedby="helpId">'+
-                                    '<small id="helpId" class="text-muted">Enter URL</small>'+
-                                '</div>'+
-                            '</div>'+
-                            '<div class="col-4 mt-2 pt-1">'+
-                                '<div class="form-group">'+
-                                    '<label for="label">Title</label>'+
-                                    '<input type="text" name="title" id="title" class="form-control" placeholder="Enter Title" aria-describedby="helpId">'+
-                                    '<small id="helpId" class="text-muted">Enter Title</small>'+
-                                '</div>'+
-                            '</div>'+
-                            '<div class="col-2 align-self-center">'+
-                                '<button type="button" class="btn btn-danger" id="remove">-</button>'+
-                            '</div>'+
-                        '</div>';
-
-            $('#form-input').append(html);
-            //push number count to array
-            arrNumber.push(lengthDiv);
+             
+        const html = `  <div id="form-${lengthDiv}" class="row">
+                            <div class="col-12 row">
+                                <div class="col-5 mt-2 pt-1">
+                                    <div class="form-group">
+                                        <label for="url">Link ${lengthDiv}</label>
+                                        <input type="text" name="url" id="url" class="form-control" placeholder="Enter URL" aria-describedby="helpURL">
+                                        <small id="helpURL" class="text-muted">Enter URL</small>
+                                    </div>
+                                </div>
+                                <div class="col-4 mt-2 pt-1">
+                                    <div class="form-group">
+                                        <label for="label">Title</label>
+                                        <input type="text" name="title" id="title" class="form-control" placeholder="Enter Title" aria-describedby="helpTitle">
+                                        <small id="helpTitle" class="text-muted">Enter Title</small>
+                                    </div>
+                                </div>
+                                <div class="col-3 align-self-center">
+                                    <button type="button" class="btn btn-danger" id="remove">-</button>
+                                </div>
+                            </div>
+                            
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="label">Description</label>
+                                    <input type="text" name="description" id="description" class="form-control" placeholder="Enter Description" aria-describedby="HelpDesc">
+                                    <small id="HelpDesc" class="text-muted">Enter Title</small>
+                                </div>
+                            </div>
+                        </div>
+            `;
+     
+        $('#form-input').append(html);
+        //push number count to array
+        arrNumber.push(lengthDiv);
         });
 
         // remove a form-input div dynamically when button "remove" is clicked
-        $('#form-input').on('click', '#remove', function(){
-            const el = $(this).parent().parent().remove();
+        $('#form-input').on('click', '#remove', function(e){
+            const el = $(this).parent().parent().parent().remove();
             // remove number count from array
-            const index = $(this).parent().parent().attr('id').split('-')[1];
+            const index = arrNumber.indexOf($(this).parent().parent().parent().attr('id').split('-')[1]);
             
             if (index) {
-               return arrNumber.shift(index);
+               return arrNumber.shift(index - 1);
             }
         });
 
@@ -115,18 +163,18 @@
 
         $('#submit-spec').click(function(){
             let html = '';
-            
+            const type = $('input[name=options]:checked').val();
             $('#form-input > div').each(function(index, el){
                 const url = $(this).find('#url').val();
                 const label = $(this).find('#title').val();
-                html += '- ' + '['+ label +']('+ url +') \n';
+                const desc = $(this).find('#description').val();
+                html += '- ' + '['+ label +']('+ url +'): ' + desc + '\n';
             });
             $('#result').val(html);
         });
 
         $('#submit-gg').click(function(){
             let html = '';
-            
             $('#form-input > div').each(function(index, el){
                 const url = $(this).find('#url').val();
                 const label = $(this).find('#title').val();
@@ -134,7 +182,7 @@
             });
             $('#result').val(html);
         });
-        
+
     </script>
 </body>
 </html>
