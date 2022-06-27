@@ -193,15 +193,17 @@
                 const url = $(this).find('#url').val();
                 const label = $(this).find('#title').val();
                 const desc = $(this).find('#description').val();
+								const radio = $('input[name="options"]:checked').val();
+
                 // get length of div id
                 if (desc != '') {
-                    html += '<li> - ' + '['+ label +']('+ url +'): ' + desc + '</li>\n';
+                    html += '<li> ' + radio + '['+ label +']('+ url +'): ' + desc + '</li>\n';
                 }
                 else {
-                    html += '<li> - ' + '['+ label +']('+ url +')</li>\n';
+                    html += '<li> ' + radio + '['+ label +']('+ url +')</li>\n';
                 }
             });
-            $('#result').val(html);
+
             editor.setData(html);           
         });
 
@@ -212,9 +214,8 @@
                 const label = $(this).find('#title').val();
                 html += `=HYPERLINK("${ url }";"${ label }")` + '\n';
             });
-            $('#result').val(html);
-            editor.setData(html);           
 
+            editor.setData(html);           
         });
 
     </script>
