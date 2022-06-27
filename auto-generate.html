@@ -107,7 +107,7 @@
     </script>
     <script type="text/javascript">
         // declare an array to store all number
-        let arrNumber = []; 
+        let arrNumber = [];
         const enter = '&#13;&#10';
         // create a new form-input div dynamically when button "add" is clicked with count of div id = 1 
         $('#add').click(function(){
@@ -116,6 +116,7 @@
                 const element = arrNumber[i];
                 if (element == lengthDiv) {
                     lengthDiv += 1;
+										orderNumber += 1;
                 }
             }
              
@@ -193,8 +194,7 @@
                 const url = $(this).find('#url').val();
                 const label = $(this).find('#title').val();
                 const desc = $(this).find('#description').val();
-								const radio = $('input[name="options"]:checked').val();
-
+								const radio = $('input[name="options"]:checked').val() == 'on' ? '': '-';
                 // get length of div id
                 if (desc != '') {
                     html += '<li> ' + radio + '['+ label +']('+ url +'): ' + desc + '</li>\n';
